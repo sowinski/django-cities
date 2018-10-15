@@ -1006,6 +1006,19 @@ class Command(BaseCommand):
                             region__country=pc.country)
                 except Subregion.DoesNotExist:
                     pc.subregion = None
+                except Subregion.MultipleObjectsReturned:
+                    self.logger.warn("Found multiple subregions for '{}' in '{}' - ignoring".format(
+                        pc.region_name,
+                        pc.subregion_name))
+                    self.logger.debug("item: {}\nsubregions: {}".format(
+                        item,
+                        Subregion.objects.filter(
+                            Q(region__name_std__iexact=pc.region_name) |
+                            Q(region__name__iexact=pc.region_name),
+                            Q(name_std__iexact=pc.subregion_name) |
+                            Q(name__iexact=pc.subregion_name),
+                            region__country=pc.country).values_list('id', flat=True)))
+                    pc.subregion = None
             else:
                 pc.subregion = None
 
