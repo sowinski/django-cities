@@ -56,6 +56,7 @@ from ...conf import (city_types, district_types, import_opts, import_opts_all,
 from ...models import (Region, Subregion, District, PostalCode, AlternativeName)
 from ...util import geo_distance
 
+from django.db import connection
 
 # Interpret all files as utf-8
 if sys.version_info < (3,):
@@ -627,11 +628,15 @@ class Command(BaseCommand):
                                    .distance(defaults['location'])\
                                    .order_by('distance')[0]
                     else:
-                        city = City.objects.filter(
-                            location__distance_lte=(defaults['location'], D(km=1000))
-                        ).annotate(
-                            distance=Distance('location', defaults['location'])
-                        ).order_by('distance').first()
+                        print(connection.vendor)
+                        if connection.vendor=="mysql":
+                            print("distance not supported on mysql databases")
+                        else:
+                            city = City.objects.filter(
+                                location__distance_lte=(defaults['location'], D(km=1000))
+                            ).annotate(
+                                distance=Distance('location', defaults['location'])
+                            ).order_by('distance').first()
                 except (City.DoesNotExist, ValueError) as e:
                     self.logger.warning(
                         "District: %s: DB backend does not support native '.distance(...)' query "
