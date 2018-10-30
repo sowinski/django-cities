@@ -614,8 +614,6 @@ class Command(BaseCommand):
             # Find city
             city = None
             try:
-                print("###########")
-                print(geonameid)
                 city = city_index[self.hierarchy[geonameid]]
             except KeyError:
                 self.logger.debug("District: %d %s: Cannot find city in hierarchy, using nearest", geonameid, defaults['name'])
@@ -625,6 +623,7 @@ class Command(BaseCommand):
                 # we fall back to degree search, MYSQL has no support
                 # and Spatialite with SRID 4236.
                 try:
+                    '''
                     if django_version < (1, 9):
                         city = City.objects.filter(population__gt=city_pop_min)\
                                    .distance(defaults['location'])\
@@ -639,6 +638,7 @@ class Command(BaseCommand):
                             ).annotate(
                                 distance=Distance('location', defaults['location'])
                             ).order_by('distance').first()
+                    '''
                 except (City.DoesNotExist, ValueError) as e:
                     self.logger.warning(
                         "District: %s: DB backend does not support native '.distance(...)' query "
