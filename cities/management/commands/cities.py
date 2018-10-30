@@ -614,6 +614,8 @@ class Command(BaseCommand):
             # Find city
             city = None
             try:
+                print("###########")
+                print(geonameid)
                 city = city_index[self.hierarchy[geonameid]]
             except KeyError:
                 self.logger.debug("District: %d %s: Cannot find city in hierarchy, using nearest", geonameid, defaults['name'])
