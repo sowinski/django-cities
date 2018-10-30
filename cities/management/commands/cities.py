@@ -632,7 +632,7 @@ class Command(BaseCommand):
                         ).annotate(
                             distance=Distance('location', defaults['location'])
                         ).order_by('distance').first()
-                except City.DoesNotExist as e:
+                except (City.DoesNotExist, ValueError) as e:
                     self.logger.warning(
                         "District: %s: DB backend does not support native '.distance(...)' query "
                         "falling back to two degree search",
