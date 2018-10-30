@@ -649,6 +649,9 @@ class Command(BaseCommand):
                         if dist < min_dist:
                             min_dist = dist
                             city = e
+                except:
+                    #SKIP 
+                    print("Workaround")
             else:
                 self.logger.debug("Found city in hierarchy: %s [%d]", city.name, geonameid)
 
