@@ -48,7 +48,7 @@ from django.db import transaction
 from django.db.models import Q
 from django.db.models import CharField, ForeignKey
 
-from ...conf import (city_types, district_types, import_opts, import_opts_all,
+from ...conf import (city_types, import_opts, import_opts_all,
                      HookException, settings, CURRENCY_SYMBOLS,
                      INCLUDE_AIRPORT_CODES, INCLUDE_NUMERIC_ALTERNATIVE_NAMES,
                      NO_LONGER_EXISTENT_COUNTRY_CODES,
@@ -595,7 +595,7 @@ class Command(BaseCommand):
                 continue
 
             _type = item['featureCode']
-            if _type not in district_types:
+            if _type not in settings.district_types:
                 continue
 
             defaults = {
