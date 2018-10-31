@@ -597,8 +597,9 @@ class Command(BaseCommand):
 
             _type = item['featureCode']
             if _type not in settings.district_types:
-                print(item['name'], item['featureCode'], item['geonameid'])
                 continue
+                
+            print(item['name'], item['featureCode'], item['geonameid'])
 
             defaults = {
                 'name': item['name'],
