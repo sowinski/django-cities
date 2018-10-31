@@ -613,6 +613,7 @@ class Command(BaseCommand):
 
             if item['geonameid']==6947513 or item['geonameid']=='6947513': 
                 print(item['name'], item['featureCode'], item['geonameid'])
+                print(self.hierarchy[geonameid])
             
             # Find city
             city = None
