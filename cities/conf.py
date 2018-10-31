@@ -310,6 +310,9 @@ def create_settings():
 
     if hasattr(django_settings, "CITIES_DATA_DIR"):
         res.data_dir = django_settings.CITIES_DATA_DIR
+        
+    if hasattr(django_settings, "CITIES_DISTRICT_TYPES"):
+        res.district_types = django_settings.CITIES_DISTRICT_TYPES
 
     if hasattr(django_settings, "CITIES_POSTAL_CODES"):
         res.postal_codes = set([e.upper() for e in django_settings.CITIES_POSTAL_CODES])
