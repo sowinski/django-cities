@@ -611,7 +611,7 @@ class Command(BaseCommand):
 
             geonameid = int(item['geonameid'])
 
-            if item['geonameid']==6947513: 
+            if item['geonameid']==6947513 or item['geonameid']=='6947513': 
                 print(item['name'], item['featureCode'], item['geonameid'])
             
             # Find city
