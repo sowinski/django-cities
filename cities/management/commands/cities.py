@@ -596,8 +596,8 @@ class Command(BaseCommand):
                 continue
 
             _type = item['featureCode']
-            print(item['name'], item['featureCode'], item['geonameid'])
             if _type not in settings.district_types:
+                print(item['name'], item['featureCode'], item['geonameid'])
                 continue
 
             defaults = {
