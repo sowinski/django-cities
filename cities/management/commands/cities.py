@@ -598,8 +598,6 @@ class Command(BaseCommand):
             _type = item['featureCode']
             if _type not in settings.district_types:
                 continue
-                
-            print(item['name'], item['featureCode'], item['geonameid'])
 
             defaults = {
                 'name': item['name'],
@@ -613,6 +611,9 @@ class Command(BaseCommand):
 
             geonameid = int(item['geonameid'])
 
+            if item['geonameid']==6947513: 
+                print(item['name'], item['featureCode'], item['geonameid'])
+            
             # Find city
             city = None
             try:
