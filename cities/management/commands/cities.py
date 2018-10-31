@@ -596,6 +596,7 @@ class Command(BaseCommand):
                 continue
 
             _type = item['featureCode']
+            print(district_types)
             if _type not in district_types:
                 continue
 
